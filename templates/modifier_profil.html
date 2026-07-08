@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Modifier mon profil{% endblock %}
+
+{% block content %}
+
+<div class="container" style="max-width:700px;padding-top:140px;padding-bottom:80px;">
+
+<div class="card shadow-lg p-5 rounded-4">
+
+<h1 class="mb-4">
+
+Modifier mon profil
+
+</h1>
+
+<form method="POST">
+
+<div class="mb-3">
+
+<label>Nom</label>
+
+<input
+class="form-control"
+name="nom"
+value="{{ current_user.nom }}"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label>Prénom</label>
+
+<input
+class="form-control"
+name="prenom"
+value="{{ current_user.prenom }}"
+required>
+
+</div>
+
+<div class="mb-4">
+
+<label>Email</label>
+
+<input
+type="email"
+class="form-control"
+name="email"
+value="{{ current_user.email }}"
+required>
+
+</div>
+
+<button class="btn btn-success">
+
+💾 Enregistrer
+
+</button>
+
+<a
+href="/mon-compte"
+class="btn btn-secondary">
+
+Annuler
+
+</a>
+
+</form>
+
+</div>
+
+</div>
+
+{% endblock %}

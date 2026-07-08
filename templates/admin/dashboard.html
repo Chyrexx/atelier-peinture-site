@@ -1,0 +1,229 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}
+Tableau de bord
+{% endblock %}
+
+{% block sidebar %}
+
+<div class="admin-user">
+
+    <h4>Espace Administrateur</h4>
+
+    <p>Bienvenue, {{ current_user.prenom }}</p>
+
+</div>
+
+<nav class="admin-menu">
+
+    <a href="/admin" class="active">
+        <i class="fa-solid fa-chart-line"></i>
+        Tableau de bord
+    </a>
+
+    <a href="/admin/ateliers">
+        <i class="fa-solid fa-palette"></i>
+        Ateliers
+    </a>
+
+    <a href="/admin/reservations">
+        <i class="fa-solid fa-calendar-days"></i>
+        Réservations
+    </a>
+
+    <a href="/admin/oeuvres">
+        <i class="fa-solid fa-image"></i>
+        Œuvres
+    </a>
+
+    <a href="/admin/utilisateurs">
+        <i class="fa-solid fa-users"></i>
+        Utilisateurs
+    </a>
+
+</nav>
+
+<div class="sidebar-bottom">
+
+    <a href="/">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Retour au site
+
+    </a>
+
+</div>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>📊 Tableau de bord</h1>
+
+        <p>
+
+            Vue d'ensemble de votre activité.
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="stats-grid">
+
+    <div class="stat-card">
+
+        <div class="stat-icon ateliers">
+
+            🎨
+
+        </div>
+
+        <h2>{{ nb_ateliers }}</h2>
+
+        <p>Ateliers</p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="stat-icon reservations">
+
+            📅
+
+        </div>
+
+        <h2>{{ nb_reservations }}</h2>
+
+        <p>Réservations</p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="stat-icon oeuvres">
+
+            🖼️
+
+        </div>
+
+        <h2>{{ nb_oeuvres }}</h2>
+
+        <p>Œuvres</p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="stat-icon utilisateurs">
+
+            👥
+
+        </div>
+
+        <h2>{{ nb_utilisateurs }}</h2>
+
+        <p>Utilisateurs</p>
+
+    </div>
+
+</div>
+
+
+<div class="dashboard-row">
+
+    <div class="card-admin">
+
+<h2>📅 Prochains ateliers</h2>
+
+{% if prochains_ateliers %}
+
+    {% for atelier in prochains_ateliers %}
+
+    <div class="dashboard-item">
+
+        <strong>
+
+            {{ atelier.titre }}
+
+        </strong>
+
+        <br>
+
+        <small>
+
+            {{ atelier.date }}
+
+            •
+
+            {{ atelier.heure }}
+
+        </small>
+
+    </div>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>
+
+        Aucun atelier prévu.
+
+    </p>
+
+{% endif %}
+
+    </div>
+
+    <div class="card-admin">
+
+        <h2>🔔 Dernières réservations</h2>
+
+{% if dernieres_reservations %}
+
+    {% for reservation in dernieres_reservations %}
+
+    <div class="dashboard-item">
+
+        <strong>
+
+            {{ reservation.utilisateur.prenom }}
+            {{ reservation.utilisateur.nom }}
+
+        </strong>
+
+        <br>
+
+        <small>
+
+            {{ reservation.atelier.titre }}
+
+        </small>
+
+    </div>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>
+
+        Aucune réservation.
+
+    </p>
+
+{% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

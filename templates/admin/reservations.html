@@ -1,0 +1,175 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}
+Réservations
+{% endblock %}
+
+{% block sidebar %}
+
+<div class="admin-user">
+
+    <h4>Espace Administrateur</h4>
+
+    <p>Bienvenue, {{ current_user.prenom }}</p>
+
+</div>
+
+<nav class="admin-menu">
+
+    <a href="/admin">
+        <i class="fa-solid fa-chart-line"></i>
+        Tableau de bord
+    </a>
+
+    <a href="/admin/ateliers">
+        <i class="fa-solid fa-palette"></i>
+        Ateliers
+    </a>
+
+    <a href="/admin/reservations" class="active">
+        <i class="fa-solid fa-calendar-days"></i>
+        Réservations
+    </a>
+
+    <a href="/admin/oeuvres">
+        <i class="fa-solid fa-image"></i>
+        Œuvres
+    </a>
+
+    <a href="/admin/utilisateurs">
+        <i class="fa-solid fa-users"></i>
+        Utilisateurs
+    </a>
+
+</nav>
+
+<div class="sidebar-bottom">
+
+    <a href="/">
+        <i class="fa-solid fa-arrow-left"></i>
+        Retour au site
+    </a>
+
+</div>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>📅 Réservations</h1>
+
+        <p>
+
+            Toutes les réservations des clients.
+
+        </p>
+
+    </div>
+
+</div>
+
+<div class="card-admin">
+
+<table class="table align-middle">
+
+<thead>
+
+<tr>
+
+<th>Client</th>
+
+<th>Atelier</th>
+
+<th>Date</th>
+
+<th>Heure</th>
+
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for reservation in reservations %}
+
+<tr>
+
+<td>
+
+<strong>
+
+{{ reservation.utilisateur.prenom }}
+
+{{ reservation.utilisateur.nom }}
+
+</strong>
+
+<br>
+
+<small>
+
+{{ reservation.utilisateur.email }}
+
+</small>
+
+</td>
+
+<td>
+
+{{ reservation.atelier.titre }}
+
+</td>
+
+<td>
+
+{{ reservation.atelier.date }}
+
+</td>
+
+<td>
+
+{{ reservation.atelier.heure }}
+
+</td>
+
+<td>
+
+<div class="oeuvre-actions">
+
+<a
+href="/admin/atelier/{{ reservation.atelier.id }}"
+class="btn-action view">
+
+<i class="fa-solid fa-eye"></i>
+
+</a>
+
+<a
+href="/annuler-reservation/{{ reservation.id }}"
+class="btn-action delete">
+
+<i class="fa-solid fa-trash"></i>
+
+</a>
+
+</div>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

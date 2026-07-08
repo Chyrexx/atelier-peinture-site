@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Planning des ateliers{% endblock %}
+
+{% block content %}
+
+<section class="planning-header">
+
+    <h1>📅 Planning des ateliers</h1>
+
+    <p>Choisissez votre prochain moment créatif.</p>
+
+</section>
+
+<section class="planning-grid">
+
+{% for atelier in ateliers %}
+
+<div class="atelier-card">
+
+    {% if atelier.image %}
+        <img src="{{ atelier.image }}" class="atelier-image">
+    {% endif %}
+
+    <h2>{{ atelier.titre }}</h2>
+
+    <p>📅 {{ atelier.date }}</p>
+
+    <p>🕒 {{ atelier.heure }}</p>
+
+    <p>⏱ {{ atelier.duree }}</p>
+
+    <p>🎯 {{ atelier.niveau }}</p>
+
+    <p>👥 {{ atelier.places }} places restantes</p>
+
+    <a href="/reservation/{{ atelier.id }}" class="btn-reserver">
+        Réserver
+    </a>
+
+</div>
+
+{% else %}
+
+<h2 style="text-align:center;width:100%;">
+Aucun atelier disponible.
+</h2>
+
+{% endfor %}
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,515 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Gestion des ateliers{% endblock %}
+
+{% block sidebar %}
+
+<div class="admin-user">
+
+    <h4>Espace Administrateur</h4>
+
+    <p>Bienvenue, {{ current_user.prenom }}</p>
+
+</div>
+
+<nav class="admin-menu">
+
+    <a href="/admin">
+        <i class="fa-solid fa-chart-line"></i>
+        Tableau de bord
+    </a>
+
+    <a href="/admin/ateliers" class="active">
+        <i class="fa-solid fa-palette"></i>
+        Ateliers
+    </a>
+
+    <a href="/admin/reservations">
+        <i class="fa-solid fa-calendar-days"></i>
+        Réservations
+    </a>
+
+    <a href="/admin/oeuvres">
+        <i class="fa-solid fa-image"></i>
+        Œuvres
+    </a>
+
+    <a href="/admin/utilisateurs">
+        <i class="fa-solid fa-users"></i>
+        Utilisateurs
+    </a>
+
+</nav>
+
+<div class="sidebar-bottom">
+
+    <a href="/">
+        <i class="fa-solid fa-arrow-left"></i>
+        Retour au site
+    </a>
+
+</div>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>🎨 Gestion des ateliers</h1>
+
+        <p>Gérez tous les ateliers de peinture.</p>
+
+    </div>
+
+    <button
+        class="btn-admin"
+        data-bs-toggle="modal"
+        data-bs-target="#modalAjout">
+
+        ➕ Nouvel atelier
+
+    </button>
+
+</div>
+
+<div class="gallery-grid">
+
+{% for atelier in ateliers %}
+
+<div class="oeuvre-card">
+
+    <div class="oeuvre-content">
+
+        <h3>{{ atelier.titre }}</h3>
+
+        <p>{{ atelier.description }}</p>
+
+        <hr>
+
+        <p>📅 {{ atelier.date }}</p>
+
+        <p>🕒 {{ atelier.heure }}</p>
+
+        <p>👥 {{ atelier.places }} place(s)</p>
+
+        <div class="oeuvre-actions">
+
+            <button
+                class="btn-action edit"
+                data-bs-toggle="modal"
+                data-bs-target="#modifier{{ atelier.id }}">
+
+                <i class="fa-solid fa-pen"></i>
+
+            </button>
+
+            <a
+                href="/admin/atelier/{{ atelier.id }}"
+                class="btn-action view">
+
+                <i class="fa-solid fa-users"></i>
+
+            </a>
+
+            <button
+                class="btn-action delete"
+                data-bs-toggle="modal"
+                data-bs-target="#supprimer{{ atelier.id }}">
+
+                <i class="fa-solid fa-trash"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===========================
+     MODAL MODIFIER
+=========================== -->
+
+<div
+class="modal fade"
+id="modifier{{ atelier.id }}"
+tabindex="-1">
+
+<div class="modal-dialog modal-lg">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h4>Modifier l'atelier</h4>
+
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="modal"></button>
+
+</div>
+
+<form
+method="POST"
+action="/admin/modifier/{{ atelier.id }}">
+
+<div class="modal-body">
+
+<div class="mb-3">
+
+<label>Titre</label>
+
+<input
+class="form-control"
+type="text"
+name="titre"
+value="{{ atelier.titre }}"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label>Description</label>
+
+<textarea
+class="form-control"
+rows="4"
+name="description">{{ atelier.description }}</textarea>
+
+</div>
+
+<div class="row">
+
+<div class="col-md-4 mb-3">
+
+<label>Date</label>
+
+<input
+class="form-control"
+type="date"
+name="date"
+value="{{ atelier.date }}">
+
+</div>
+
+<div class="col-md-4 mb-3">
+
+<label>Heure</label>
+
+<input
+class="form-control"
+type="time"
+name="heure"
+value="{{ atelier.heure }}">
+
+</div>
+
+<div class="col-md-4 mb-3">
+
+<label>Places</label>
+
+<input
+class="form-control"
+type="number"
+name="places"
+value="{{ atelier.places }}">
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Durée</label>
+
+<input
+class="form-control"
+type="text"
+name="duree"
+value="{{ atelier.duree }}">
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Niveau</label>
+
+<input
+class="form-control"
+type="text"
+name="niveau"
+value="{{ atelier.niveau }}">
+
+</div>
+
+</div>
+
+</div>
+
+<div class="modal-footer">
+
+<button
+type="button"
+class="btn btn-secondary"
+data-bs-dismiss="modal">
+
+Annuler
+
+</button>
+
+<button
+type="submit"
+class="btn-admin">
+
+Enregistrer
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===========================
+     MODAL SUPPRIMER
+=========================== -->
+
+<div
+class="modal fade"
+id="supprimer{{ atelier.id }}"
+tabindex="-1">
+
+<div class="modal-dialog">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h4>Supprimer un atelier</h4>
+
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="modal"></button>
+
+</div>
+
+<div class="modal-body">
+
+<p>Voulez-vous vraiment supprimer cet atelier ?</p>
+
+<div class="alert alert-warning">
+
+<strong>{{ atelier.titre }}</strong>
+
+<br>
+
+{{ atelier.date }} à {{ atelier.heure }}
+
+</div>
+
+<p>Cette action est irréversible.</p>
+
+</div>
+
+<div class="modal-footer">
+
+<button
+type="button"
+class="btn btn-secondary"
+data-bs-dismiss="modal">
+
+Annuler
+
+</button>
+
+<a
+href="/admin/supprimer/{{ atelier.id }}"
+class="btn btn-danger">
+
+Supprimer définitivement
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<!-- ==========================================
+     MODAL AJOUTER UN ATELIER
+=========================================== -->
+
+<div
+class="modal fade"
+id="modalAjout"
+tabindex="-1">
+
+<div class="modal-dialog modal-lg">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h4>
+
+Ajouter un atelier
+
+</h4>
+
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="modal"></button>
+
+</div>
+
+<form
+method="POST"
+action="/admin/ajouter">
+
+<div class="modal-body">
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<label>Titre</label>
+
+<input
+class="form-control"
+type="text"
+name="titre"
+required>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Niveau</label>
+
+<input
+class="form-control"
+type="text"
+name="niveau">
+
+</div>
+
+<div class="col-md-12 mb-3">
+
+<label>Description</label>
+
+<textarea
+class="form-control"
+rows="4"
+name="description"></textarea>
+
+</div>
+
+<div class="col-md-4 mb-3">
+
+<label>Date</label>
+
+<input
+class="form-control"
+type="date"
+name="date"
+required>
+
+</div>
+
+<div class="col-md-4 mb-3">
+
+<label>Heure</label>
+
+<input
+class="form-control"
+type="time"
+name="heure"
+required>
+
+</div>
+
+<div class="col-md-4 mb-3">
+
+<label>Places</label>
+
+<input
+class="form-control"
+type="number"
+name="places"
+value="10">
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Durée</label>
+
+<input
+class="form-control"
+type="text"
+name="duree">
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Niveau</label>
+
+<input
+class="form-control"
+type="text"
+name="niveau">
+
+</div>
+
+</div>
+
+</div>
+
+<div class="modal-footer">
+
+<button
+type="button"
+class="btn btn-secondary"
+data-bs-dismiss="modal">
+
+Annuler
+
+</button>
+
+<button
+type="submit"
+class="btn-admin">
+
+Créer l'atelier
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Profil utilisateur{% endblock %}
+
+{% block sidebar %}
+
+<div class="admin-user">
+
+    <h4>Espace Administrateur</h4>
+
+    <p>Bienvenue, {{ current_user.prenom }}</p>
+
+</div>
+
+<nav class="admin-menu">
+
+    <a href="/admin">
+        <i class="fa-solid fa-chart-line"></i>
+        Tableau de bord
+    </a>
+
+    <a href="/admin/ateliers">
+        <i class="fa-solid fa-palette"></i>
+        Ateliers
+    </a>
+
+    <a href="/admin/reservations">
+        <i class="fa-solid fa-calendar-days"></i>
+        Réservations
+    </a>
+
+    <a href="/admin/oeuvres">
+        <i class="fa-solid fa-image"></i>
+        Œuvres
+    </a>
+
+    <a href="/admin/utilisateurs" class="active">
+        <i class="fa-solid fa-users"></i>
+        Utilisateurs
+    </a>
+
+</nav>
+
+<div class="sidebar-bottom">
+
+    <a href="/admin/utilisateurs">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Retour aux utilisateurs
+
+    </a>
+
+</div>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>👤 Profil utilisateur</h1>
+
+        <p>Informations détaillées du client.</p>
+
+    </div>
+
+</div>
+
+<div class="card-admin">
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <h5>Nom</h5>
+
+            <p>{{ utilisateur.nom }}</p>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <h5>Prénom</h5>
+
+            <p>{{ utilisateur.prenom }}</p>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <h5>Email</h5>
+
+            <p>{{ utilisateur.email }}</p>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <h5>Rôle</h5>
+
+            <p>{{ utilisateur.role }}</p>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <h5>Réservations</h5>
+
+            <p>{{ utilisateur.reservations|length }}</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

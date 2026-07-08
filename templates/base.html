@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dans Tous Mes États D'Arts{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/animations.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        🎨 Dans Tous Mes États D'Arts
+    </div>
+
+<nav>
+
+    <a href="/">Accueil</a>
+
+    <a href="/planning">Planning</a>
+
+    <a href="/galerie">Galerie</a>
+
+    <a href="/contact">Contact</a>
+
+    <a href="/apropos">À propos</a>
+
+    {% if current_user.is_authenticated %}
+
+        {% if current_user.role == "admin" %}
+        <a href="/admin">Administration</a>
+        {% endif %}
+        
+        <a href="/logout" class="connexion">
+            Déconnexion
+        </a>
+
+    {% else %}
+
+        <a class="connexion" href="/login">
+            Connexion
+        </a>
+
+        <a class="inscription" href="/register">
+            Inscription
+        </a>
+
+    {% endif %}
+
+</nav>
+
+</header>
+
+{% block content %}
+{% endblock %}
+
+<footer>
+
+<p>© 2026 Dans Tous Mes États D'Arts • Tous droits réservés</p>
+
+</footer>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>

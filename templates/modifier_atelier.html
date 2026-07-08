@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Modifier un atelier{% endblock %}
+
+{% block content %}
+
+<div class="container" style="padding-top:140px;max-width:900px;">
+
+<h1>Modifier un atelier</h1>
+
+<hr>
+
+<form method="POST">
+
+<div class="mb-3">
+
+<label>Titre</label>
+
+<input
+class="form-control"
+name="titre"
+value="{{ atelier.titre }}"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label>Description</label>
+
+<textarea
+class="form-control"
+name="description">{{ atelier.description }}</textarea>
+
+</div>
+
+<div class="row">
+
+<div class="col-md-6">
+
+<label>Date</label>
+
+<input
+type="date"
+class="form-control"
+name="date"
+value="{{ atelier.date }}"
+required>
+
+</div>
+
+<div class="col-md-6">
+
+<label>Heure</label>
+
+<div class="col-md-6">
+
+    <label>Durée</label>
+
+    <input
+        class="form-control"
+        type="text"
+        name="duree"
+        value="{{ atelier.duree }}">
+
+</div>
+
+<div class="col-md-6">
+
+    <label>Niveau</label>
+
+    <input
+        class="form-control"
+        type="text"
+        name="niveau"
+        value="{{ atelier.niveau }}">
+
+</div>
+
+<input
+type="time"
+class="form-control"
+name="heure"
+value="{{ atelier.heure }}"
+required>
+
+</div>
+
+</div>
+
+<br>
+
+<div class="row">
+
+<div class="col-md-6">
+
+<label>Durée</label>
+
+<input
+class="form-control"
+name="duree"
+value="{{ atelier.duree }}">
+
+</div>
+
+<div class="col-md-6">
+
+<label>Places</label>
+
+<input
+type="number"
+class="form-control"
+name="places"
+value="{{ atelier.places }}">
+
+</div>
+
+</div>
+
+<br>
+
+<label>Niveau</label>
+
+<select
+class="form-control"
+name="niveau">
+
+<option {% if atelier.niveau=="Débutant" %}selected{% endif %}>Débutant</option>
+
+<option {% if atelier.niveau=="Intermédiaire" %}selected{% endif %}>Intermédiaire</option>
+
+<option {% if atelier.niveau=="Confirmé" %}selected{% endif %}>Confirmé</option>
+
+<option {% if atelier.niveau=="Tous niveaux" %}selected{% endif %}>Tous niveaux</option>
+
+</select>
+
+<br>
+
+<button class="btn btn-success">
+
+💾 Enregistrer
+
+</button>
+
+<a
+href="/admin"
+class="btn btn-secondary">
+
+Annuler
+
+</a>
+
+</form>
+
+</div>
+
+{% endblock %}

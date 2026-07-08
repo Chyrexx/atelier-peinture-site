@@ -1,0 +1,89 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}
+Administration
+{% endblock %}
+
+{% block sidebar %}
+
+<h5>Menu</h5>
+
+<ul class="nav flex-column mt-4">
+
+    <i class="fa-solid fa-house"></i> Tableau de bord
+
+    <i class="fa-solid fa-palette"></i> Ateliers
+
+    <i class="fa-solid fa-image"></i> Galerie
+
+    <i class="fa-solid fa-users"></i> Réservations
+
+</ul>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="admin-header">
+
+    <div>
+
+        <h1>Espace Administrateur</h1>
+
+        <p>
+            Bienvenue dans le tableau de bord de gestion de
+            <strong>Dans Tous Mes États D'Arts</strong>.
+        </p>
+
+    </div>
+
+    <div class="admin-profile">
+
+        <div class="avatar">
+            👩
+        </div>
+
+        <div>
+
+            <strong>{{ current_user.prenom }}</strong><br>
+
+            <small>Administratrice</small>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="welcome-card">
+
+    <h2>Bienvenue 👋</h2>
+    
+<button class="btn-admin mt-3">
+
+    Commencer
+
+</button>
+
+    <p>
+
+        Cet espace vous permettra bientôt de gérer :
+
+    </p>
+
+    <ul>
+
+        <li>🎨 Les ateliers</li>
+
+        <li>🖼️ La galerie</li>
+
+        <li>👥 Les réservations</li>
+
+        <li>📊 Les statistiques</li>
+
+    </ul>
+
+</div>
+
+{% endblock %}

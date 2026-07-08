@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block content %}
+
+<div class="container" style="max-width:550px;padding-top:140px;padding-bottom:80px;">
+
+    <div class="card shadow-lg p-5 rounded-4">
+
+        <h1 class="text-center mb-4">
+            Connexion
+        </h1>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+
+            <div class="mb-3">
+
+                <label class="form-label">Adresse e-mail</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    required>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label">Mot de passe</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    required>
+
+            </div>
+
+            <button class="btn btn-primary w-100">
+
+                Se connecter
+
+            </button>
+
+        </form>
+
+        <hr>
+
+        <p class="text-center">
+
+            Pas encore de compte ?
+
+            <a href="/register">
+                Inscrivez-vous
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

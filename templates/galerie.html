@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+Galerie
+
+{% endblock %}
+
+{% block content %}
+
+<section class="planning-header">
+
+    <h1>🎨 Galerie des œuvres</h1>
+
+    <p>
+
+        Découvrez les magnifiques créations réalisées par nos artistes
+        et nos élèves lors des ateliers.
+
+    </p>
+
+</section>
+
+<section class="galerie-container">
+
+    {% if oeuvres %}
+
+    <div class="galerie-grid">
+
+        {% for oeuvre in oeuvres %}
+ 
+        <div
+class="modal fade"
+id="oeuvre{{ oeuvre.id }}"
+tabindex="-1">
+
+<div class="modal-dialog modal-xl modal-dialog-centered">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h4>
+
+{{ oeuvre.titre }}
+
+</h4>
+
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="modal">
+</button>
+
+</div>
+
+<div class="modal-body">
+
+<img
+src="{{ url_for('static', filename='uploads/oeuvres/' + oeuvre.image) }}"
+class="img-fluid rounded mb-4"
+alt="{{ oeuvre.titre }}">
+
+<p>
+
+{{ oeuvre.description }}
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+        
+        <div
+        class="galerie-card"
+        data-bs-toggle="modal"
+        data-bs-target="#oeuvre{{ oeuvre.id }}"
+        style="cursor:pointer;">
+
+            <div class="galerie-image">
+
+                <img
+                    src="{{ url_for('static', filename='uploads/oeuvres/' + oeuvre.image) }}"
+                    alt="{{ oeuvre.titre }}">
+
+            </div>
+
+            <div class="galerie-content">
+
+                <h2>
+
+                    {{ oeuvre.titre }}
+
+                </h2>
+
+                <p>
+
+                    {{ oeuvre.description }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="galerie-vide">
+
+        <i class="fa-solid fa-image"></i>
+
+        <h2>
+
+            Aucune œuvre pour le moment
+
+        </h2>
+
+        <p>
+
+            Les premières créations apparaîtront ici dès qu'elles seront
+            ajoutées depuis l'administration.
+
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Changer le mot de passe{% endblock %}
+
+{% block content %}
+
+<div class="container" style="max-width:700px;padding-top:140px;padding-bottom:80px;">
+
+<div class="card shadow-lg p-5 rounded-4">
+
+<h1 class="mb-4">
+
+🔒 Changer mon mot de passe
+
+</h1>
+
+<form method="POST">
+
+<div class="mb-3">
+
+<label>Ancien mot de passe</label>
+
+<input
+type="password"
+class="form-control"
+name="ancien"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label>Nouveau mot de passe</label>
+
+<input
+type="password"
+class="form-control"
+name="nouveau"
+required>
+
+</div>
+
+<div class="mb-4">
+
+<label>Confirmer le nouveau mot de passe</label>
+
+<input
+type="password"
+class="form-control"
+name="confirmation"
+required>
+
+</div>
+
+<button class="btn btn-success">
+
+💾 Modifier le mot de passe
+
+</button>
+
+<a
+href="/mon-compte"
+class="btn btn-secondary">
+
+Annuler
+
+</a>
+
+</form>
+
+</div>
+
+</div>
+
+{% endblock %}

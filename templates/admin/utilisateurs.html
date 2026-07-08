@@ -1,0 +1,170 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Utilisateurs{% endblock %}
+
+{% block sidebar %}
+
+<div class="admin-user">
+
+    <h4>Espace Administrateur</h4>
+
+    <p>Bienvenue, {{ current_user.prenom }}</p>
+
+</div>
+
+<nav class="admin-menu">
+
+    <a href="/admin">
+        <i class="fa-solid fa-chart-line"></i>
+        Tableau de bord
+    </a>
+
+    <a href="/admin/ateliers">
+        <i class="fa-solid fa-palette"></i>
+        Ateliers
+    </a>
+
+    <a href="/admin/reservations">
+        <i class="fa-solid fa-calendar-days"></i>
+        Réservations
+    </a>
+
+    <a href="/admin/oeuvres">
+        <i class="fa-solid fa-image"></i>
+        Œuvres
+    </a>
+
+    <a href="/admin/utilisateurs" class="active">
+        <i class="fa-solid fa-users"></i>
+        Utilisateurs
+    </a>
+
+</nav>
+
+<div class="sidebar-bottom">
+
+    <a href="/admin">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Retour au tableau de bord
+
+    </a>
+
+</div>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>👥 Utilisateurs</h1>
+
+        <p>
+
+            Gérez les comptes de vos clients.
+
+        </p>
+
+    </div>
+
+</div>
+
+<div class="card-admin">
+
+<table class="table align-middle">
+
+<thead>
+
+<tr>
+
+<th>Nom</th>
+
+<th>Prénom</th>
+
+<th>Email</th>
+
+<th>Rôle</th>
+
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for utilisateur in utilisateurs %}
+
+<tr>
+
+<td>{{ utilisateur.nom }}</td>
+
+<td>{{ utilisateur.prenom }}</td>
+
+<td>{{ utilisateur.email }}</td>
+
+<td>
+
+{% if utilisateur.role == "admin" %}
+
+<span class="badge bg-danger">
+
+Administrateur
+
+</span>
+
+{% else %}
+
+<span class="badge bg-primary">
+
+Client
+
+</span>
+
+{% endif %}
+
+</td>
+
+<td>
+
+<div class="oeuvre-actions">
+
+<a
+href="/admin/utilisateur/{{ utilisateur.id }}"
+class="btn-action view">
+
+<i class="fa-solid fa-eye"></i>
+
+</a>
+
+{% if utilisateur.role != "admin" %}
+
+<a
+href="/admin/utilisateur/supprimer/{{ utilisateur.id }}"
+class="btn-action delete">
+
+<i class="fa-solid fa-trash"></i>
+
+</a>
+
+{% endif %}
+
+</div>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

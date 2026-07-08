@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+</head>
+
+<body style="font-family:Arial;padding:40px;">
+
+<h1 style="color:#c62828;">
+❌ Votre réservation a été annulée
+</h1>
+
+<p>
+
+Vous venez d'annuler votre réservation.
+
+</p>
+
+<hr>
+
+<h2>{{ atelier.titre }}</h2>
+
+<p>
+<b>Client :</b>
+{{ utilisateur.prenom }} {{ utilisateur.nom }}
+</p>
+
+<p>
+<b>Email :</b>
+{{ utilisateur.email }}
+</p>
+
+<p>
+📅 {{ atelier.date }}
+</p>
+
+<p>
+🕒 {{ atelier.heure }}
+</p>
+
+<p>
+🎯 {{ atelier.niveau }}
+</p>
+
+</body>
+
+</html>

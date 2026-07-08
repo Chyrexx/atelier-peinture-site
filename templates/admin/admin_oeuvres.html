@@ -1,0 +1,390 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Gestion des œuvres{% endblock %}
+
+{% block sidebar %}
+
+<div class="admin-user">
+
+    <h4>Espace Administrateur</h4>
+
+    <p>Bienvenue, {{ current_user.prenom }}</p>
+
+</div>
+
+<nav class="admin-menu">
+
+    <a href="/admin">
+        <i class="fa-solid fa-chart-line"></i>
+        Tableau de bord
+    </a>
+
+    <a href="/admin/ateliers">
+        <i class="fa-solid fa-palette"></i>
+        Ateliers
+    </a>
+
+    <a href="/admin/reservations">
+        <i class="fa-solid fa-calendar-days"></i>
+        Réservations
+    </a>
+
+    <a href="/admin/oeuvres" class="active">
+        <i class="fa-solid fa-images"></i>
+        Œuvres
+    </a>
+
+    <a href="/admin/utilisateurs">
+        <i class="fa-solid fa-users"></i>
+        Utilisateurs
+    </a>
+
+</nav>
+
+<div class="sidebar-bottom">
+
+    <a href="/">
+        <i class="fa-solid fa-arrow-left"></i>
+        Retour au site
+    </a>
+
+</div>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>🎨 Gestion des œuvres</h1>
+
+        <p>
+
+            Ajoutez, consultez et gérez les œuvres de la galerie.
+
+        </p>
+
+    </div>
+
+</div>
+
+<div class="card-admin form-card">
+
+    <div class="form-title">
+
+        <div class="icon-box">
+
+            +
+
+        </div>
+
+        <h2>
+
+            Ajouter une œuvre
+
+        </h2>
+
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <div class="form-grid">
+
+            <div>
+
+                <label>Titre de l'œuvre</label>
+
+                <input
+                    type="text"
+                    name="titre"
+                    placeholder="Ex : Aquarelle florale"
+                    required>
+
+            </div>
+
+            <div>
+
+                <label>Description</label>
+
+                <textarea
+                    name="description"
+                    placeholder="Décrivez cette œuvre..."></textarea>
+
+            </div>
+
+            <div>
+
+                <label>Image de l'œuvre</label>
+
+                <div class="upload-box">
+
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                    <p>
+
+                        Cliquez pour choisir une image
+
+                    </p>
+
+                    <input
+                        type="file"
+                        name="image"
+                        required>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <button class="btn-admin">
+
+            Ajouter l'œuvre
+
+        </button>
+
+    </form>
+
+</div>
+
+<div class="gallery-header">
+
+    <h2>Toutes les œuvres</h2>
+
+</div>
+
+<div class="gallery-grid">
+
+{% for oeuvre in oeuvres %}
+
+<div class="oeuvre-card">
+
+    <img
+        src="{{ url_for('static', filename='uploads/oeuvres/' + oeuvre.image) }}"
+        alt="{{ oeuvre.titre }}">
+
+    <div class="oeuvre-content">
+
+        <h3>{{ oeuvre.titre }}</h3>
+
+        <p>{{ oeuvre.description }}</p>
+
+        <div class="oeuvre-actions">
+
+            <button
+                class="btn-action edit"
+                data-bs-toggle="modal"
+                data-bs-target="#modifierOeuvre{{ oeuvre.id }}">
+
+                <i class="fa-solid fa-pen"></i>
+
+            </button>
+
+            <button
+    class="btn-action delete"
+    data-bs-toggle="modal"
+    data-bs-target="#supprimerOeuvre{{ oeuvre.id }}">
+
+    <i class="fa-solid fa-trash"></i>
+
+           </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Modal Modifier -->
+
+<!-- Modal Supprimer -->
+
+<div
+class="modal fade"
+id="supprimerOeuvre{{ oeuvre.id }}"
+tabindex="-1">
+
+<div class="modal-dialog">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h4>
+
+Supprimer une œuvre
+
+</h4>
+
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="modal"></button>
+
+</div>
+
+<div class="modal-body">
+
+<p>
+
+Voulez-vous vraiment supprimer cette œuvre ?
+
+</p>
+
+<div class="alert alert-warning">
+
+<strong>
+
+{{ oeuvre.titre }}
+
+</strong>
+
+</div>
+
+<p>
+
+Cette action est irréversible.
+
+</p>
+
+</div>
+
+<div class="modal-footer">
+
+<button
+type="button"
+class="btn btn-secondary"
+data-bs-dismiss="modal">
+
+Annuler
+
+</button>
+
+<a
+href="/admin/oeuvre/supprimer/{{ oeuvre.id }}"
+class="btn btn-danger">
+
+Supprimer définitivement
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+class="modal fade"
+id="modifierOeuvre{{ oeuvre.id }}"
+tabindex="-1">
+
+<div class="modal-dialog modal-lg">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h4>
+
+Modifier l'œuvre
+
+</h4>
+
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="modal"></button>
+
+</div>
+
+<form
+method="POST"
+action="/admin/oeuvre/modifier/{{ oeuvre.id }}"
+enctype="multipart/form-data">
+
+<div class="modal-body">
+
+<div class="mb-3">
+
+<label>Titre</label>
+
+<input
+class="form-control"
+type="text"
+name="titre"
+value="{{ oeuvre.titre }}"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label>Description</label>
+
+<textarea
+class="form-control"
+rows="4"
+name="description">{{ oeuvre.description }}</textarea>
+
+</div>
+
+<div class="mb-3">
+
+<label>Changer la photo (optionnel)</label>
+
+<input
+class="form-control"
+type="file"
+name="image">
+
+</div>
+
+</div>
+
+<div class="modal-footer">
+
+<button
+type="button"
+class="btn btn-secondary"
+data-bs-dismiss="modal">
+
+Annuler
+
+</button>
+
+<button
+type="submit"
+class="btn-admin">
+
+Enregistrer
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<div class="admin-tip">
+
+    <i class="fa-solid fa-circle-info"></i>
+
+    Conseil : utilisez des images de bonne qualité pour une belle galerie.
+
+</div>
+
+{% endblock %}

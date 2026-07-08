@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+</head>
+
+<body style="font-family:Arial;padding:40px;">
+
+<h1>🎨 Nouvelle réservation</h1>
+
+<p>
+
+Un nouvel utilisateur vient de réserver un atelier.
+
+</p>
+
+<hr>
+
+<h2>{{ atelier.titre }}</h2>
+
+<p><b>Client :</b>
+
+{{ utilisateur.prenom }} {{ utilisateur.nom }}
+
+</p>
+
+<p>
+
+<b>Email :</b>
+
+{{ utilisateur.email }}
+
+</p>
+
+<p>
+
+📅 {{ atelier.date }}
+
+</p>
+
+<p>
+
+🕒 {{ atelier.heure }}
+
+</p>
+
+</body>
+
+</html>

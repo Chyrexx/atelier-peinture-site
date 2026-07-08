@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Mes réservations{% endblock %}
+
+{% block content %}
+
+<div class="container" style="padding-top:140px;padding-bottom:80px;">
+
+    <h1 class="mb-5">
+        Mes réservations
+    </h1>
+
+    {% if reservations %}
+
+        {% for reservation in reservations %}
+
+            <div class="card shadow-sm mb-4 p-4">
+
+                <h3>{{ reservation.atelier.titre }}</h3>
+
+                <p>📅 {{ reservation.atelier.date }}</p>
+
+                <p>🕒 {{ reservation.atelier.heure }}</p>
+
+                <p>🎨 {{ reservation.atelier.niveau }}</p>
+
+                <p>
+                    <span class="badge bg-success">
+                        ✔ Réservation confirmée
+                    </span>
+                </p>
+
+                <a
+                    href="/annuler-reservation/{{ reservation.id }}"
+                    class="btn btn-danger"
+                    onclick="return confirm('Êtes-vous sûr de vouloir annuler cette réservation ?');">
+
+                    ❌ Annuler ma réservation
+
+                </a>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>Vous n'avez encore réservé aucun atelier.</p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
