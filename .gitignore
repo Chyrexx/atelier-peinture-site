@@ -1,0 +1,19 @@
+# Environnement
+.env
+.venv/
+venv/
+
+# Base de données locale
+instance/
+*.db
+
+# Cache Python
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
