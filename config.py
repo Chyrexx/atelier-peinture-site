@@ -3,21 +3,21 @@ import os
 
 load_dotenv()
 
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///site.db")
 
-class Config:
-    
-    SQLALCHEMY_DATABASE_URI = os.getenv(
-    "DATABASE_URL",
-    "sqlite:///site.db"
-)
-
-if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
-    SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace(
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace(
         "postgres://",
         "postgresql://",
         1
     )
-    
+
+
+class Config:
+
+    SECRET_KEY = os.getenv("SECRET_KEY")
+
+    SQLALCHEMY_DATABASE_URI = DATABASE_URL
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Administrateur
