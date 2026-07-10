@@ -43,6 +43,30 @@ print("=======================")
 
 migrate = Migrate(app, db)
 
+with app.app_context():
+
+    db.create_all()
+
+    ADMIN_EMAIL = app.config["ADMIN_EMAIL"]
+    ADMIN_PASSWORD = app.config["ADMIN_PASSWORD"]
+
+    admin = User.query.filter_by(email=ADMIN_EMAIL).first()
+
+    if admin is None:
+
+        admin = User(
+            nom="Maman",
+            prenom="Admin",
+            email=ADMIN_EMAIL,
+            password=generate_password_hash(ADMIN_PASSWORD),
+            role="admin"
+        )
+
+        db.session.add(admin)
+        db.session.commit()
+
+demarrer_scheduler(app)
+
 app.register_blueprint(auth)
 # -----------------------------
 # Flask Login
@@ -645,30 +669,4 @@ def admin_oeuvres():
     )
 
 if __name__ == "__main__":
-
-    import os
-
-    ADMIN_EMAIL = app.config["ADMIN_EMAIL"]
-    ADMIN_PASSWORD = app.config["ADMIN_PASSWORD"]
-    with app.app_context():
-
-        db.create_all()
-
-        admin = User.query.filter_by(email=ADMIN_EMAIL).first()
-
-        if admin is None:
-
-            admin = User(
-                nom="Maman",
-                prenom="Admin",
-                email=ADMIN_EMAIL,
-                password=generate_password_hash(ADMIN_PASSWORD),
-                role="admin"
-            )
-
-            db.session.add(admin)
-            db.session.commit()
-
-    demarrer_scheduler(app)   
-    
     app.run(debug=True)
