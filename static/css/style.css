@@ -474,7 +474,7 @@ footer{
 
 .contact-card{
 
-    background:rgb(105, 205, 160);
+    background:rgb(120, 149, 161);
 
     border-radius:22px;
 
@@ -540,7 +540,7 @@ footer{
 
 .contact-card p{
 
-    color:rgb(173, 173, 173);
+    color:rgb(0, 0, 0);
 
     line-height:1.8;
 
@@ -558,7 +558,7 @@ footer{
 
     text-align:center;
 
-    background:rgb(0, 0, 0);
+    background:rgb(193, 100, 100);
 
     padding:60px;
 
@@ -586,7 +586,7 @@ footer{
 
     line-height:2;
 
-    color:#000000;
+    color:rgb(0, 0, 0);
 
     margin-bottom:40px;
 
