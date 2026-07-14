@@ -17,7 +17,7 @@ body{
 
     background:#f5f7fb;
 
-    color:#2d3748;
+    color:#ffffff;
 
 }
 
@@ -133,7 +133,7 @@ a{
 
     gap:14px;
 
-    color:#555;
+    color:#211e1e;
 
     padding:14px 18px;
 
@@ -243,7 +243,7 @@ a{
 
     font-weight:700;
 
-    color:#1f2937;
+    color:#000000;
 
 }
 
@@ -275,7 +275,7 @@ a{
 
     padding:35px;
 
-    box-shadow:0 15px 45px rgba(0,0,0,.06);
+    box-shadow:0 15px 45px rgba(0, 0, 0, 0.507);
 
     margin-bottom:45px;
 
@@ -601,13 +601,13 @@ a{
 
 .oeuvre-card{
 
-    background:white;
+    background:rgb(255, 255, 255);
 
     border-radius:24px;
 
     overflow:hidden;
 
-    box-shadow:0 15px 40px rgba(0,0,0,.07);
+    box-shadow:0 15px 40px rgb(255, 255, 255);
 
     transition:.35s;
 
@@ -617,7 +617,7 @@ a{
 
     transform:translateY(-8px);
 
-    box-shadow:0 20px 55px rgba(0,0,0,.12);
+    box-shadow:0 20px 55px rgb(0, 0, 0);
 
 }
 

@@ -126,6 +126,10 @@ def galerie():
         oeuvres=oeuvres
     )
 
+@app.route("/atelier-individuel")
+def atelier_individuel():
+    return render_template("atelier_individuel.html")
+
 
 @app.route("/contact")
 def contact():
