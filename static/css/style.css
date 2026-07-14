@@ -540,7 +540,7 @@ footer{
 
 .contact-card p{
 
-    color:#000000;
+    color:rgb(173, 173, 173);
 
     line-height:1.8;
 
@@ -626,7 +626,7 @@ footer{
 
 .info-box{
 
-    background:rgb(255, 255, 255);
+    background:rgb(173, 173, 173);
 
     border-radius:20px;
 
